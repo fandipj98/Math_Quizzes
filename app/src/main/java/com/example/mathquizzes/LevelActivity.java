@@ -30,6 +30,7 @@ public class LevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 //        untuk passing argumen dengan mendefine keynya
         intent.putExtra("level", levelText);
+        intent.putExtra("kodeLevel", "1");
         startActivity(intent);
     }
 
@@ -41,6 +42,7 @@ public class LevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 //        untuk passing argumen dengan mendefine keynya
         intent.putExtra("level", levelText);
+        intent.putExtra("kodeLevel", "2");
         startActivity(intent);
     }
 
@@ -52,6 +54,7 @@ public class LevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 //        untuk passing argumen dengan mendefine keynya
         intent.putExtra("level", levelText);
+        intent.putExtra("kodeLevel", "3");
         startActivity(intent);
     }
 
@@ -63,6 +66,7 @@ public class LevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 //        untuk passing argumen dengan mendefine keynya
         intent.putExtra("level", levelText);
+        intent.putExtra("kodeLevel", "4");
         startActivity(intent);
     }
 
@@ -74,6 +78,7 @@ public class LevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 //        untuk passing argumen dengan mendefine keynya
         intent.putExtra("level", levelText);
+        intent.putExtra("kodeLevel", "5");
         startActivity(intent);
     }
 }

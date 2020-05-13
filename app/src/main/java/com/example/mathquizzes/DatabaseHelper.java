@@ -57,12 +57,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public  Cursor getAllQuestions(int kodeLevel){
+    public  Cursor getAllData(int kodeLevel){
         SQLiteDatabase db = this.getReadableDatabase();
         String[] whereArgs = {String.valueOf(kodeLevel)};
 //        Log.d("coba", whereArgs[0]);
         Cursor cursor = db.rawQuery("select * from game where id_level = ?", whereArgs);
         return cursor;
+    }
+
+    public void updateHighscore(int kodeLevel, int score){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "update " + TABLE_NAME + " set " + COL_7 + " = " + score + " where " + COL_6 + " = " + kodeLevel;
+        db.execSQL(sql);
     }
 
 }

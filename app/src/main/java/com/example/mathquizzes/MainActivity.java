@@ -114,4 +114,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
     }
+
+    public void highscore(View view){
+        Intent intent = new Intent(this, HighscoreActivity.class);
+        startActivity(intent);
+    }
 }

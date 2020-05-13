@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
+
     DatabaseHelper myDb;
     private TextView question, qCount, timer;
     private Button option1, option2, option3, option4;
@@ -27,8 +28,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int quesNum;
     private CountDownTimer countDown;
     private List<Game> gameList;
+    private int score;
     int kodeLevel;
     int flag;
+    String level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 
         // koneksikan dengan xml
-        String level = getIntent().getStringExtra("level");
+        level = getIntent().getStringExtra("level");
         TextView levelText = findViewById(R.id.text_level);
         levelText.setText(level);
 
@@ -60,11 +63,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         option4.setOnClickListener(this);
 
         flag = 0;
+        score = 0;
         init();
 
     }
 
-    public void mainMenu(View view){
+    public void listLevel(View view){
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         GameActivity.this.finish();
@@ -74,7 +78,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameList = new ArrayList<>();
 
         myDb = new DatabaseHelper(this);
-        Cursor cursor = myDb.getAllQuestions(kodeLevel);
+        Cursor cursor = myDb.getAllData(kodeLevel);
         if(cursor.getCount() == 0){
             Toast.makeText(GameActivity.this, "Data gagal diread", Toast.LENGTH_LONG).show();
         }
@@ -196,7 +200,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             //Right Answer
 
             ((Button)view).setBackgroundResource(R.drawable.correct_button);
-
+            score++;
+            TextView scoreText = findViewById(R.id.text_score);
+            scoreText.setText(String.valueOf(score));
         }
         else{
             //Wrong Answer
@@ -247,6 +253,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         else{
             // Last question, jadi ke EndActivity
             Intent intent = new Intent(GameActivity.this, EndActivity.class);
+            intent.putExtra("level", level);
+            intent.putExtra("kodeLevel", String.valueOf(kodeLevel));
+            intent.putExtra("score", String.valueOf(score));
             startActivity(intent);
             GameActivity.this.finish();
         }

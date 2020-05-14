@@ -68,7 +68,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onBackPressed(){
+        countDown.cancel();
+        GameActivity.this.finish();
+    }
+
     public void listLevel(View view){
+        countDown.cancel();
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         GameActivity.this.finish();
@@ -97,9 +104,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void getQuestionsList(){
         questionList = new ArrayList<>();
 
-//        questionList.add(new Question("Question 1", "1", "2", "3", "4", 2));
-//        questionList.add(new Question("Question 2", "1", "2", "3", "4", 2));
-//        questionList.add(new Question("Question 3", "1", "2", "3", "4", 2));
         String pertanyaan = "";
         String pilihan1 = "";
         String pilihan2 = "";
@@ -160,8 +164,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         countDown = new CountDownTimer(miliseconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(millisUntilFinished < 10000)
+                if(millisUntilFinished < 10000) {
                     timer.setText(String.valueOf(millisUntilFinished / 1000));
+                }
             }
 
             @Override
